@@ -1,4 +1,5 @@
 import Methods.Methods;
+
 import java.io.*;
 
 /**
@@ -23,8 +24,26 @@ public class MainClass {
             if (command == 1) {
                 while (true) {
                     System.out.print("Введите 1 для выбора существующего дня либо 2 для создания нового: ");
-                    int Day = Methods.getInput();
-                    
+                    int day = Methods.getDay();
+
+                    if (day == 2) {
+                        System.out.println("Введите день: ");
+                        String fileName = in.readLine();
+                        File newFile = new File("/" + fileName + ".txt");
+                        if (newFile.createNewFile()) {
+                            System.out.println("Новый файл создан");
+                        } else {
+                            System.out.println("Файл уже существует");
+                        }
+                    }
+
+                    if (day == 1) {
+                        System.out.println("Введите день: ");
+                        String fileName = "/" + in.readLine() + ".txt";
+                        File newFile = new File(fileName);
+                        Methods.createStat(newFile);
+                        break;
+                    }
                 }
             }
         }
